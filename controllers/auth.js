@@ -6,16 +6,21 @@ const createUser = async (req = request, res = response) => {
     try {
         const { 
             email, 
-            password, 
+            segundo_nombre,
+            apellido_paterno,
+            profile_image,
+            phone,
+            nombre
         } = req.body;
 
         const [result] = await pool.query(
-
+            'INSERT INTO users_test_jose_luis_jimenez_vazquez(nombre, segundo_nombre, apellido_paterno, email, profile_image, phone) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [nombre, segundo_nombre, apellido_paterno, email, profile_image, phone]
         );
 
-
         res.status(201).json({
-            ok: true
+            ok: true,
+            id: result.insertId,
         });
     } catch (error) {
         console.log(error);
